@@ -1,35 +1,41 @@
 from sqlalchemy.orm import Session
-from models.Pregunta import Pregunta
-from schemas.Pregunta import PreguntaCreate, PreguntaUpdate
+from models.Producto import Producto  # Asegúrate de que el modelo Producto esté en este módulo
+from schemas.Producto import ProductoCreate, ProductoUpdate  # Asegúrate de que los esquemas estén en este módulo
 
-def get_preguntas(db: Session, skip: int = 0, limit: int = 10):
-    return db.query(Pregunta).offset(skip).limit(limit).all()
+def get_productos(db: Session, skip: int = 0, limit: int = 10):
+    """Obtener una lista de productos con paginación."""
+    return db.query(Producto).offset(skip).limit(limit).all()
 
-def get_pregunta(db: Session, id: int):
-    return db.query(Pregunta).filter(Pregunta.id == id).first()
+def get_producto(db: Session, id: int):
+    """Obtener un producto por ID."""
+    return db.query(Producto).filter(Producto.ID == id).first()
 
-def get_pregunta_by_pregunta(db: Session, pregunta: str):
-    return db.query(Pregunta).filter(Pregunta.pregunta == pregunta).first()
+def get_producto_by_cod_barras(db: Session, cod_barras: str):
+    """Obtener un producto por código de barras."""
+    return db.query(Producto).filter(Producto.Cod_barras == cod_barras).first()
 
-def create_pregunta(db: Session, pregunta: PreguntaCreate):
-    db_pregunta = Pregunta(**pregunta.dict())
-    db.add(db_pregunta)
+def create_producto(db: Session, producto: ProductoCreate):
+    """Crear un nuevo producto."""
+    db_producto = Producto(**producto.dict())
+    db.add(db_producto)
     db.commit()
-    db.refresh(db_pregunta)
-    return db_pregunta
+    db.refresh(db_producto)
+    return db_producto
 
-def update_pregunta(db: Session, id: int, pregunta: PreguntaUpdate):
-    db_pregunta = db.query(Pregunta).filter(Pregunta.id == id).first()
-    if db_pregunta:
-        for key, value in pregunta.dict().items():
-            setattr(db_pregunta, key, value)
+def update_producto(db: Session, id: int, producto: ProductoUpdate):
+    """Actualizar un producto existente."""
+    db_producto = db.query(Producto).filter(Producto.ID == id).first()
+    if db_producto:
+        for key, value in producto.dict().items():
+            setattr(db_producto, key, value)
         db.commit()
-        db.refresh(db_pregunta)
-    return db_pregunta
+        db.refresh(db_producto)
+    return db_producto
 
-def delete_pregunta(db: Session, id: int):
-    db_pregunta = db.query(Pregunta).filter(Pregunta.id == id).first()
-    if db_pregunta:
-        db.delete(db_pregunta)
+def delete_producto(db: Session, id: int):
+    """Eliminar un producto por ID."""
+    db_producto = db.query(Producto).filter(Producto.ID == id).first()
+    if db_producto:
+        db.delete(db_producto)
         db.commit()
-    return db_pregunta
+    return db_producto
