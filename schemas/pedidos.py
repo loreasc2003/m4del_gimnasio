@@ -1,13 +1,20 @@
 from typing import List, Union
-from pydantic  import BaseModel
+from pydantic import BaseModel
 from datetime import datetime, date
+import enum
+
+class MyTipo(str, enum.Enum):
+    Promocion = "Promoción"
+    Descuento = "Descuento"
+    Precio_Tienda = "Precio Tienda"
 
 class PedidoBase(BaseModel):
-    Tipo: str
+    Tipo: MyTipo
+    Fecha_Registro: datetime
+    Fecha_Actualizacion: datetime
     Estatus: bool
-    Fecha_Registro:datetime
-    Fecha_Actualizacion:datetime
- 
+    Total_Productos: float
+    Costo_Total: float
 
 class PedidoCreate(PedidoBase):
     pass
@@ -16,8 +23,7 @@ class PedidoUpdate(PedidoBase):
     pass
 
 class Pedido(PedidoBase):
-    ID:int
-    # owner_id: int clave foranea
+    ID: int
+
     class Config:
         orm_mode = True
-        
