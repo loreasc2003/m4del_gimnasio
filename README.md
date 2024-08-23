@@ -133,33 +133,58 @@ Crear un espacio virtual dinámico que sirva como centro de información, motiva
 ## Contexto del proyecto
 Este repositorio contiene el código fuente del Backend de un sistema de gimnasio, implementado los modelos de las tablas, los esquemas y las rutas para relizar las funciones CRUD, conectadas a una base de datos. 
 
+## Descripción General
+El backend está encargado de manejar la lógica de negocio y la comunicación con la base de datos. Proporciona una API para interactuar con el sistema.
+
+## Funcionalidades principales
+- **Modelos de tablas:** Se definieron los modelos de las tablas que representan las entidades principales del modulo de marketing, como pedidos, productos, evaluación al cliente, etc.
+- **Validaciones:** Se implementaron esquemas de validación para asegurar la integridad de los datos agregando un token para cada tabla.
+- **Rutas CRUD:** Se desarrollaron rutas para realizar las operaciones CRUD (Crear, Leer, Actualizar, Eliminar) en cada entidad del sistema.
+- **Conexión a la base de datos:** Se configuró la conexión a la base de datos, asegurando que todas las operaciones se realicen de manera eficiente y segura.
+  
+<div align="center">
+  
+![WhatsApp Image 2024-08-22 at 9 26 59 PM](https://github.com/user-attachments/assets/eb875e63-6657-43c4-9c4c-25f07476c40f)
+
+</div>
+
+## Rutas Disponibles
+- `GET /api/entidades`: Obtiene todos los registros.
+- `GET /api/entidades/:id`: Obtiene un registro por id.
+- `POST /api/entidades`: Crea un nuevo registro.
+- `PUT /api/entidades/:id`: Actualiza un registro por id.
+- `DELETE /api/entidades/:id`: Elimina un registro.
+  <br>
+ <br>**ESTOS SON SOLO EJEMPLOS DE COMO SE MANEJAN LAS RUTAS, YA QUE CADA TABLA/SECCIÓN CUENTA CON LAS SUYAS**
+
 ## Tecnologías utilizadas 
-- Vue.js
-- TypeScript
-- SCSS
-- CSS
-
-## Sketches
-
-
-## Wireframes 
+- Python
+- FastAPI
+- Aiven
+- JSON Web Token
 
 
 ## Instalación y uso
 1. Clona este repositorio:
- ```
+ ```sh
 git clone https://github.com/tu-usuario/nombre-repositorio.git
 
 ```
-3. Ubicarse en la carpeta de Front e instalar las dependencias:
- ```
-npm install
-```
-5. Ejecuta el siguiente comando para correr el proyecto:
-```
-npm run dev
-```
-7. Abre el navegador y accede a la liga mostrada 
+2. Activa el entorno virtual: Ubícate en la carpeta `BackEnd` en tu terminal (Git Bash) y ejecuta:
+    ```sh
+   source BackEndGym/Scripts/activate
+     ```
 
+3. Instala las siguientes dependencias con `pip`:
+   ```sh
+   pip install sqlalchemy mysqlclient fastapi uvicorn cryptography
+
+4. Por ultimo para correr el Back es necesario ubicarse en la carpeta BackEnd y colocar el siguiente comando
+   ```sh
+   python -m uvicorn app:app --reload
+    ```
+   o
+     ```sh
+    -m uvicorn app:app --reload
 
 
